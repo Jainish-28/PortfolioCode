@@ -45,9 +45,15 @@ class HomeBanner extends StatelessWidget {
                 const SizedBox(height: defaultPadding),
                 if (!Responsive.isMobileLarge(context))
                   ElevatedButton(
-                    onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> const PdfView()));
-                      },
+                    onPressed: () async{
+                              try {
+                                await launchUrl(Uri.parse("https://github.com/Jainish-28"));
+                              } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Error launching URL: $e")),
+                              );
+                              }
+                            },
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                           horizontal: defaultPadding * 2,
